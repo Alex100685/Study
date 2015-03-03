@@ -1,0 +1,6 @@
+int MyScore = 10;
+MyScore = MyScore--;
+MyScore = MyScore * 2;
+MyScore = MyScore/3;
+
+System.out.println ("MyScore is  " +MyScore);
