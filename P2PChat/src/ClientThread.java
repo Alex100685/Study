@@ -1,0 +1,47 @@
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.util.List;
+
+public class ClientThread extends Thread {
+	
+	private Socket socket;
+	public static List<Message> msg;
+	private int pos = 0;
+	
+	public ClientThread (Socket socket, List <Message> msg, List <Message> privateMsg){
+		this.socket = socket;
+		this.msg = msg;
+	}
+	
+	private void listToBytes (OutputStream os) throws IOException{
+		
+		final int sz = msg.size();
+		for (int i =pos; i<sz; i++){
+			msg.get(i).writeToStream(os);
+		pos = msg.size();
+		}
+	}
+	public void run(){
+		try{
+			final OutputStream os = socket.getOutputStream();
+			while (!isInterrupted()){
+				if(pos < msg.size()){
+					listToBytes(os);	
+				}
+				
+				Thread.sleep(100);
+				
+			}
+			
+			socket.close();
+			
+			
+		}catch (Exception e) {
+			return;
+		}
+		
+		
+	}
+}
