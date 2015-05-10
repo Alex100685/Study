@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
+import java.beans.XMLEncoder;
 import java.util.List;
 
 public class AdvDAOImpl implements AdvDAO {
@@ -15,6 +17,10 @@ public class AdvDAOImpl implements AdvDAO {
     public List<Advertisement> list() {
         Query query = entityManager.createQuery("SELECT a FROM Advertisement a", Advertisement.class);
         return (List<Advertisement>) query.getResultList();
+        
+        
+        
+        
     }
 
     @Override

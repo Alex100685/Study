@@ -9,7 +9,27 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.transform.Result;
+import javax.xml.transform.stream.StreamResult;
+
+import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.util.List;
 
 @Controller
 @RequestMapping("/SpringMVC_war_exploded")
@@ -22,6 +42,64 @@ public class MainController {
 	public ModelAndView listAdvs() {
 		return new ModelAndView("index", "advs", advDAO.list());
 	}
+	
+	@RequestMapping("/advs.xml")
+	public void advsDownload(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		File f = new File("d:\\advs.xml");
+		int BUFF_SIZE =(int) f.length();
+		byte[] buffer = new byte[BUFF_SIZE];
+		FileInputStream fis = new FileInputStream(f);
+		BufferedInputStream bis = new BufferedInputStream(fis);
+		response.setCharacterEncoding("Content-Transfer-Encoding:binary");
+		response.setContentType("Content-Type:application/xml");
+		response.setHeader("Content-Disposition:attachment", "filename=\"advs.xml\"");
+		response.setContentLength((int) f.length());
+		OutputStream os = response.getOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(os);
+		bis.read(buffer);
+		bos.write(buffer);
+		
+		bis.close();
+		bos.close();
+		
+
+		
+	}
+	
+	
+	
+	@RequestMapping("/advsDownload")
+	public String downLoadXML(Model model) throws IOException, JAXBException {
+		List <Advertisement> advsList = advDAO.list();
+		File f = new File("d:\\advs.xml");
+		if(!f.exists()){
+			f.createNewFile();
+		}
+		Advertisements advsXMLList = new Advertisements();
+		advsXMLList.setAdvertisements(advsList);
+		JAXBContext jaxbContext = JAXBContext.newInstance(Advertisements.class);
+		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+		
+		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		
+		
+		
+		for(int i=0; i<advsList.size(); i++){
+			
+			advsXMLList.getAdvertisements().get(i).getPhoto().setBody(null);
+			advsXMLList.getAdvertisements().get(i).getPhoto().setName(null);
+			
+			
+		}
+		
+		jaxbMarshaller.marshal(advsXMLList, f);
+		
+		
+		
+		return "XML";
+	}
+	
 	
 	@RequestMapping("/basket")
 	public ModelAndView listBasket() {

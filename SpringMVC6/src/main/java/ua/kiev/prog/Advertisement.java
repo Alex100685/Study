@@ -1,10 +1,15 @@
 package ua.kiev.prog;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "advertisement")
 @Entity
 @Table(name = "Advs")
 public class Advertisement {
+	
+	
     @Id
     @GeneratedValue
     private long id;
@@ -18,6 +23,7 @@ public class Advertisement {
     private String longDesc;
 
     private String phone;
+	
     private double price;
 
     @OneToOne(cascade=CascadeType.ALL)
@@ -34,7 +40,8 @@ public class Advertisement {
         this.price = price;
         this.photo = photo;
     }
-
+    
+    @XmlElement
     public long getId() {
         return id;
     }
@@ -43,14 +50,17 @@ public class Advertisement {
         this.id = id;
     }
 
+    @XmlElement
     public String getShortDesc() {
         return shortDesc;
     }
 
+    
     public void setShortDesc(String shortDesc) {
         this.shortDesc = shortDesc;
     }
 
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -59,6 +69,7 @@ public class Advertisement {
         this.name = name;
     }
 
+    @XmlElement
     public String getLongDesc() {
         return longDesc;
     }
@@ -75,6 +86,7 @@ public class Advertisement {
         this.phone = phone;
     }
 
+    @XmlElement
     public double getPrice() {
         return price;
     }

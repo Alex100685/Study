@@ -47,6 +47,8 @@
 <p><input type="submit" value="Delete to basket"></p>
   </form>
   
+<a href="/SpringMVC6/SpringMVC_war_exploded/advsDownload">Download xml-file with advs</a>
+  
   <p><a href="/SpringMVC6/SpringMVC_war_exploded/basket">To Basket</a></p>
   
     <form class="form-inline" role="form" action="/SpringMVC6/SpringMVC_war_exploded/add_page" method="post">
