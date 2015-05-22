@@ -21,7 +21,7 @@
 
 <div class="form-group"><input type="text" class="form-control" name="number" placeholder="Number of section" style="width: 343px; "></div>
 
-        <div class="form-group"><input type="text" class="form-control" name="name" placeholder="Name of section" style="width: 342px; "></div>
+        <div class="form-group"><input type="text" class="form-control" pattern = "[0-9]{1,3}$" title="Must contain only numbers from 1 to 999" name="name" placeholder="Name of section" style="width: 342px; "></div>
         <div class="form-group"><input type="submit" class="btn btn-primary" value="Add"></div>
     </form>
 </div>

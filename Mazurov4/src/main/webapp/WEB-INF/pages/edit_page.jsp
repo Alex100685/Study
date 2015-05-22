@@ -63,7 +63,7 @@
         <div class="form-group"><input type="text" class="form-control" value="${all[1].status}" name="status" placeholder="Status" style="width: 429px; "></div>
         <div class="form-group"><input type="text" class="form-control" value="${all[1].note}" name="note" placeholder="Note" style="width: 429px; "></div>
         <div class="form-group"><input type="text" class="form-control" value="${all[1].docType}" name="doctype" placeholder="Doc. type" style="width: 429px; "></div>
-        <div class="form-group"><input type="text" class="form-control" value="${all[1].quantity}" name="quantity" placeholder="Quantity" style="width: 429px; "></div>
+        <div class="form-group"><input type="text" class="form-control" pattern = "[0-9]{1,3}$" title="Must contain only numbers from 1 to 999" value="${all[1].quantity}" name="quantity" placeholder="Quantity" style="width: 429px; "></div>
         
             	<div class="form-group">File: <input type="file" name="file"></div> 	
         

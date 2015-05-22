@@ -12,7 +12,7 @@
         <div class="form-group"><h3>New big Section</h3></div>
         
 
-<div class="form-group"><input type="text" class="form-control" name="id" placeholder="Number of Big Section" style="width: 327px; "></div>
+<div class="form-group"><input type="text" class="form-control" pattern = "[0-9]{1,3}$" title="Must contain only numbers from 1 to 999" required = "required" name="id" placeholder="Number of Big Section" style="width: 327px; "></div>
         <div class="form-group"><input type="text" class="form-control" name="name" placeholder="Name of Big Section" style="width: 327px; "></div>
         <div class="form-group"><input type="submit" value="Add"></div>
     </form>

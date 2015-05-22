@@ -348,6 +348,8 @@ public class MainController {
 	
 	@RequestMapping(value = "/createDocument", method = RequestMethod.POST)
 	public ModelAndView addDoc(
+				
+				
 						@RequestParam(value="sectionName") String sectionName,
 						 @RequestParam(value="numberInSection") String inventaryNumber,
 						 @RequestParam(value="name") String name,
@@ -358,7 +360,10 @@ public class MainController {
 						 @RequestParam(value="quantity") int quantity,
 						 @RequestParam(value="file") MultipartFile file,
 						 HttpServletRequest request,
-						 HttpServletResponse response)
+						 HttpServletResponse response
+						
+						 
+			)
 	{
 		try {
 			Document doc = new Document();
